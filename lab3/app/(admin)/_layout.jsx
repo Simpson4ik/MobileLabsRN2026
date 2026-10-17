@@ -30,6 +30,7 @@ export default function AdminLayout() {
       <Stack.Screen name="news/[id]" options={{ title: "Деталі новини" }} />
       <Stack.Screen name="news/form" options={{ title: "Новина", presentation: "modal" }} />
       <Stack.Screen name="news/filter" options={sheetOptions} />
+      <Stack.Screen name="users/filter" options={sheetOptions} />
     </Stack>
   );
 }

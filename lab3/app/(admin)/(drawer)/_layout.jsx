@@ -33,6 +33,20 @@ export default function DrawerLayout() {
           drawerIcon: ({ color, size }) => <Ionicons name="newspaper-outline" size={size} color={color} />,
         }}
       />
+      <Drawer.Screen
+        name="users"
+        options={{
+          title: "Користувачі",
+          drawerIcon: ({ color, size }) => <Ionicons name="people-outline" size={size} color={color} />,
+        }}
+      />
+      <Drawer.Screen
+        name="logs"
+        options={{
+          title: "Системні логи",
+          drawerIcon: ({ color, size }) => <Ionicons name="document-text-outline" size={size} color={color} />,
+        }}
+      />
     </Drawer>
   );
 }

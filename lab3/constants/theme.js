@@ -7,6 +7,7 @@ export const colors = {
   textMuted: "#7A6A5D",
   border: "#EFE3D8",
   danger: "#C92A2A",
+  success: "#2B8A3E",
 };
 
 export const radius = {
