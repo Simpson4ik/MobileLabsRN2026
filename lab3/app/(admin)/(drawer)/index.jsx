@@ -8,19 +8,19 @@ import { formatTime } from "@/data/admin";
 
 export default function DashboardScreen() {
   const { news, users, logs } = useAdmin();
+  const [stats, setStats] = useState([]);
   const [refreshedAt, setRefreshedAt] = useState(() => new Date().toISOString());
 
   useFocusEffect(
     useCallback(() => {
+      setStats([
+        { label: "Новини", value: news.length },
+        { label: "Користувачі", value: users.length },
+        { label: "Логи", value: logs.length },
+      ]);
       setRefreshedAt(new Date().toISOString());
-    }, []),
+    }, [news, users, logs]),
   );
-
-  const stats = [
-    { label: "Новини", value: news.length },
-    { label: "Користувачі", value: users.length },
-    { label: "Логи", value: logs.length },
-  ];
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
