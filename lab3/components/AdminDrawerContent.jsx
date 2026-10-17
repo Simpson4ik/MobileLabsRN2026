@@ -4,11 +4,19 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { colors, radius, spacing, student } from "@/constants/theme";
+import { useAdmin } from "@/context/AdminContext";
 import { useAuth } from "@/context/AuthContext";
+import { LOG_EVENTS } from "@/data/admin";
 
-export function DrawerContent(props) {
+export function AdminDrawerContent(props) {
   const { user, logout } = useAuth();
+  const { addLog } = useAdmin();
   const insets = useSafeAreaInsets();
+
+  const handleLogout = () => {
+    addLog(LOG_EVENTS.logout);
+    logout();
+  };
 
   return (
     <View style={styles.container}>
@@ -18,14 +26,13 @@ export function DrawerContent(props) {
             <Ionicons name="person" size={32} color={colors.primary} />
           </View>
           <Text style={styles.name}>{student.fullName}</Text>
-          <Text style={styles.meta}>{student.group}</Text>
-          {user ? <Text style={styles.meta}>{user.email}</Text> : null}
+          <Text style={styles.email}>{user?.email ?? "admin@portal.ua"}</Text>
         </View>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
 
       <Pressable
-        onPress={logout}
+        onPress={handleLogout}
         style={({ pressed }) => [
           styles.logout,
           { marginBottom: insets.bottom + spacing.lg },
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: colors.text,
   },
-  meta: {
+  email: {
     fontSize: 13,
     color: colors.textMuted,
     marginTop: 2,

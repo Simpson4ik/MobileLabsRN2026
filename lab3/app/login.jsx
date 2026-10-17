@@ -13,10 +13,13 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { colors, radius, spacing } from "@/constants/theme";
+import { useAdmin } from "@/context/AdminContext";
 import { useAuth } from "@/context/AuthContext";
+import { LOG_EVENTS } from "@/data/admin";
 
 export default function LoginScreen() {
   const { isAuthenticated, login } = useAuth();
+  const { addLog } = useAdmin();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,6 +35,7 @@ export default function LoginScreen() {
       return;
     }
     login(email.trim());
+    addLog(LOG_EVENTS.login, "", email.trim());
     router.replace("/");
   };
 
