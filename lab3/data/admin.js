@@ -27,11 +27,11 @@ const NEWS_TITLES = [
   "Десерти без цукру набирають популярність",
 ];
 
-const NEWS_CATEGORIES = ["Рецепти", "Події", "Здоров'я", "Ресторани", "Поради"];
+export const FILTER_ALL = "Усі";
+export const NEWS_CATEGORIES = ["Рецепти", "Події", "Здоров'я", "Ресторани", "Поради"];
 export const NEWS_STATUSES = ["Опубліковано", "Чернетка", "На перевірці"];
 export const USER_STATUSES = ["Активний", "Заблокований"];
 export const USER_ROLES = ["Адміністратор", "Редактор", "Автор"];
-export const NEWS_CATEGORY_LIST = NEWS_CATEGORIES;
 
 export const LOG_EVENTS = {
   login: "Вхід у систему",

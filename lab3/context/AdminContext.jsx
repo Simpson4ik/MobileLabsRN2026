@@ -1,14 +1,14 @@
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 
 import { useAuth } from "@/context/AuthContext";
-import { LOG_EVENTS, generateLogs, generateNews, generateUsers } from "@/data/admin";
+import { FILTER_ALL, LOG_EVENTS, generateLogs, generateNews, generateUsers } from "@/data/admin";
 
 const AdminContext = createContext(null);
 
 const createId = () => `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
-const DEFAULT_NEWS_FILTER = { status: "Усі", category: "Усі" };
-const DEFAULT_USER_FILTER = { status: "Усі", role: "Усі" };
+const DEFAULT_NEWS_FILTER = { status: FILTER_ALL, category: FILTER_ALL };
+const DEFAULT_USER_FILTER = { status: FILTER_ALL, role: FILTER_ALL };
 
 export function AdminProvider({ children }) {
   const { user } = useAuth();

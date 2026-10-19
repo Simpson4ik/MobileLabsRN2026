@@ -50,7 +50,7 @@ lab3/
 │       │   └── filter.jsx         # formSheet
 │       └── users/
 │           └── filter.jsx         # formSheet
-├── components/                    # AdminDrawerContent, AdminHeader, StackHeader, Chip
+├── components/                    # AdminDrawerContent, AdminHeader, StackHeader, Chip, NewsCard, UserRow
 ├── constants/theme.js
 ├── context/                       # AuthContext, AdminContext
 └── data/admin.js                  # генерація даних

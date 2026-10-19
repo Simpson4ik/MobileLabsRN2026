@@ -5,7 +5,7 @@ import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-
 import { Chip } from "@/components/Chip";
 import { colors, radius, spacing } from "@/constants/theme";
 import { useAdmin } from "@/context/AdminContext";
-import { NEWS_CATEGORY_LIST, NEWS_STATUSES } from "@/data/admin";
+import { NEWS_CATEGORIES, NEWS_STATUSES } from "@/data/admin";
 
 export default function NewsFormScreen() {
   const { id } = useLocalSearchParams();
@@ -14,7 +14,7 @@ export default function NewsFormScreen() {
   const existing = id ? news.find((entry) => entry.id === id) : undefined;
 
   const [title, setTitle] = useState(existing?.title ?? "");
-  const [category, setCategory] = useState(existing?.category ?? NEWS_CATEGORY_LIST[0]);
+  const [category, setCategory] = useState(existing?.category ?? NEWS_CATEGORIES[0]);
   const [status, setStatus] = useState(existing?.status ?? NEWS_STATUSES[1]);
   const [image, setImage] = useState(existing?.image ?? "");
   const [text, setText] = useState(existing?.text ?? "");
@@ -47,7 +47,7 @@ export default function NewsFormScreen() {
 
       <Text style={styles.label}>Категорія</Text>
       <View style={styles.chips}>
-        {NEWS_CATEGORY_LIST.map((item) => (
+        {NEWS_CATEGORIES.map((item) => (
           <Chip key={item} label={item} selected={category === item} onPress={() => setCategory(item)} />
         ))}
       </View>

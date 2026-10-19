@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, Text, View, VirtualizedList } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { colors, radius, spacing } from "@/constants/theme";
 import { useAdmin } from "@/context/AdminContext";
@@ -51,6 +52,7 @@ function renderItem({ item }) {
 }
 
 export default function LogsScreen() {
+  const insets = useSafeAreaInsets();
   const { logs } = useAdmin();
 
   return (
@@ -65,7 +67,7 @@ export default function LogsScreen() {
       maxToRenderPerBatch={10}
       windowSize={7}
       removeClippedSubviews
-      contentContainerStyle={styles.content}
+      contentContainerStyle={[styles.content, { paddingBottom: spacing.lg + insets.bottom }]}
       ListHeaderComponent={<Text style={styles.count}>Усього записів: {logs.length}</Text>}
     />
   );

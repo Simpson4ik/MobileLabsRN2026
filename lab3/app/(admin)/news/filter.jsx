@@ -5,9 +5,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Chip } from "@/components/Chip";
 import { colors, radius, spacing } from "@/constants/theme";
 import { useAdmin } from "@/context/AdminContext";
-import { NEWS_CATEGORY_LIST, NEWS_STATUSES } from "@/data/admin";
-
-const ALL = "Усі";
+import { FILTER_ALL, NEWS_CATEGORIES, NEWS_STATUSES } from "@/data/admin";
 
 export default function NewsFilterScreen() {
   const router = useRouter();
@@ -20,7 +18,7 @@ export default function NewsFilterScreen() {
   };
 
   const handleReset = () => {
-    setDraft({ status: ALL, category: ALL });
+    setDraft({ status: FILTER_ALL, category: FILTER_ALL });
   };
 
   return (
@@ -28,14 +26,14 @@ export default function NewsFilterScreen() {
       <Text style={styles.title}>Фільтр новин</Text>
       <Text style={styles.label}>Статус</Text>
       <View style={styles.chips}>
-        {[ALL, ...NEWS_STATUSES].map((item) => (
+        {[FILTER_ALL, ...NEWS_STATUSES].map((item) => (
           <Chip key={item} label={item} selected={draft.status === item} onPress={() => setDraft({ ...draft, status: item })} />
         ))}
       </View>
 
       <Text style={styles.label}>Категорія</Text>
       <View style={styles.chips}>
-        {[ALL, ...NEWS_CATEGORY_LIST].map((item) => (
+        {[FILTER_ALL, ...NEWS_CATEGORIES].map((item) => (
           <Chip key={item} label={item} selected={draft.category === item} onPress={() => setDraft({ ...draft, category: item })} />
         ))}
       </View>

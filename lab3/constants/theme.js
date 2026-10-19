@@ -7,7 +7,15 @@ export const colors = {
   textMuted: "#7A6A5D",
   border: "#EFE3D8",
   danger: "#C92A2A",
+  dangerSoft: "#FDECEC",
   success: "#2B8A3E",
+  successSoft: "#E6F4EA",
+};
+
+export const STATUS_COLORS = {
+  "Опубліковано": colors.success,
+  "Чернетка": colors.textMuted,
+  "На перевірці": colors.primary,
 };
 
 export const radius = {

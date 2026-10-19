@@ -5,9 +5,7 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Chip } from "@/components/Chip";
 import { colors, radius, spacing } from "@/constants/theme";
 import { useAdmin } from "@/context/AdminContext";
-import { USER_ROLES, USER_STATUSES } from "@/data/admin";
-
-const ALL = "Усі";
+import { FILTER_ALL, USER_ROLES, USER_STATUSES } from "@/data/admin";
 
 export default function UsersFilterScreen() {
   const router = useRouter();
@@ -24,21 +22,21 @@ export default function UsersFilterScreen() {
       <Text style={styles.title}>Фільтр користувачів</Text>
       <Text style={styles.label}>Статус</Text>
       <View style={styles.chips}>
-        {[ALL, ...USER_STATUSES].map((item) => (
+        {[FILTER_ALL, ...USER_STATUSES].map((item) => (
           <Chip key={item} label={item} selected={draft.status === item} onPress={() => setDraft({ ...draft, status: item })} />
         ))}
       </View>
 
       <Text style={styles.label}>Роль</Text>
       <View style={styles.chips}>
-        {[ALL, ...USER_ROLES].map((item) => (
+        {[FILTER_ALL, ...USER_ROLES].map((item) => (
           <Chip key={item} label={item} selected={draft.role === item} onPress={() => setDraft({ ...draft, role: item })} />
         ))}
       </View>
 
       <View style={styles.actions}>
         <Pressable
-          onPress={() => setDraft({ status: ALL, role: ALL })}
+          onPress={() => setDraft({ status: FILTER_ALL, role: FILTER_ALL })}
           style={[styles.button, styles.resetButton]}
           accessibilityRole="button"
         >

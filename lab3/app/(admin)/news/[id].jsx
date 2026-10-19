@@ -37,7 +37,13 @@ export default function NewsDetailsScreen() {
 
   return (
     <ScrollView contentContainerStyle={styles.content}>
-      <Image source={{ uri: item.image }} style={styles.image} contentFit="cover" />
+      {item.image ? (
+        <Image source={{ uri: item.image }} style={styles.image} contentFit="cover" />
+      ) : (
+        <View style={[styles.image, styles.placeholder]}>
+          <Ionicons name="image-outline" size={48} color={colors.primary} />
+        </View>
+      )}
       <Text style={styles.category}>{item.category}</Text>
       <Text style={styles.title}>{item.title}</Text>
       <View style={styles.meta}>
@@ -89,6 +95,10 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: radius.lg,
     backgroundColor: colors.primarySoft,
+  },
+  placeholder: {
+    alignItems: "center",
+    justifyContent: "center",
   },
   category: {
     fontSize: 12,
