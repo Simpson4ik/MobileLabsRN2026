@@ -5,7 +5,7 @@ import { Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-
 import { Chip } from "@/components/Chip";
 import { colors, radius, spacing } from "@/constants/theme";
 import { useAdmin } from "@/context/AdminContext";
-import { NEWS_CATEGORIES, NEWS_STATUSES } from "@/data/admin";
+import { NEWS_CATEGORIES, NEWS_STATUS, NEWS_STATUSES } from "@/data/admin";
 
 export default function NewsFormScreen() {
   const { id } = useLocalSearchParams();
@@ -15,7 +15,7 @@ export default function NewsFormScreen() {
 
   const [title, setTitle] = useState(existing?.title ?? "");
   const [category, setCategory] = useState(existing?.category ?? NEWS_CATEGORIES[0]);
-  const [status, setStatus] = useState(existing?.status ?? NEWS_STATUSES[1]);
+  const [status, setStatus] = useState(existing?.status ?? NEWS_STATUS.draft);
   const [image, setImage] = useState(existing?.image ?? "");
   const [text, setText] = useState(existing?.text ?? "");
   const [error, setError] = useState("");

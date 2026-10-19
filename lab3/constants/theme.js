@@ -1,3 +1,5 @@
+import { NEWS_STATUS } from "@/data/admin";
+
 export const colors = {
   primary: "#E8590C",
   primarySoft: "#FFE8D9",
@@ -13,9 +15,9 @@ export const colors = {
 };
 
 export const STATUS_COLORS = {
-  "Опубліковано": colors.success,
-  "Чернетка": colors.textMuted,
-  "На перевірці": colors.primary,
+  [NEWS_STATUS.published]: colors.success,
+  [NEWS_STATUS.draft]: colors.textMuted,
+  [NEWS_STATUS.review]: colors.primary,
 };
 
 export const radius = {

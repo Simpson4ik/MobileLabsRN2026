@@ -48,8 +48,8 @@ export default function LoginScreen() {
         <View style={styles.logo}>
           <Ionicons name="restaurant" size={40} color="#fff" />
         </View>
-        <Text style={styles.title}>Книга рецептів</Text>
-        <Text style={styles.subtitle}>Увійдіть, щоб переглядати рецепти</Text>
+        <Text style={styles.title}>Кулінарний портал</Text>
+        <Text style={styles.subtitle}>Увійдіть, щоб керувати новинами та користувачами</Text>
 
         <View style={styles.form}>
           <Text style={styles.label}>Email</Text>

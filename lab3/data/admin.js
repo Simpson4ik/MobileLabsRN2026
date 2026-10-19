@@ -29,8 +29,18 @@ const NEWS_TITLES = [
 
 export const FILTER_ALL = "Усі";
 export const NEWS_CATEGORIES = ["Рецепти", "Події", "Здоров'я", "Ресторани", "Поради"];
-export const NEWS_STATUSES = ["Опубліковано", "Чернетка", "На перевірці"];
-export const USER_STATUSES = ["Активний", "Заблокований"];
+export const NEWS_STATUS = {
+  published: "Опубліковано",
+  draft: "Чернетка",
+  review: "На перевірці",
+};
+export const NEWS_STATUSES = Object.values(NEWS_STATUS);
+
+export const USER_STATUS = {
+  active: "Активний",
+  blocked: "Заблокований",
+};
+export const USER_STATUSES = Object.values(USER_STATUS);
 export const USER_ROLES = ["Адміністратор", "Редактор", "Автор"];
 
 export const LOG_EVENTS = {
@@ -76,7 +86,7 @@ export const generateUsers = (count = 60) =>
     name: `${FIRST_NAMES[index % FIRST_NAMES.length]} ${LAST_NAMES[(index * 3) % LAST_NAMES.length]}`,
     email: `user${index + 1}@portal.ua`,
     role: USER_ROLES[index % USER_ROLES.length],
-    status: index % 5 === 4 ? "Заблокований" : "Активний",
+    status: index % 5 === 4 ? USER_STATUS.blocked : USER_STATUS.active,
   }));
 
 export const generateLogs = (count = 60) =>

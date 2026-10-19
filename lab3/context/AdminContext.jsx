@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 
 import { useAuth } from "@/context/AuthContext";
-import { FILTER_ALL, LOG_EVENTS, generateLogs, generateNews, generateUsers } from "@/data/admin";
+import { FILTER_ALL, LOG_EVENTS, USER_STATUS, generateLogs, generateNews, generateUsers } from "@/data/admin";
 
 const AdminContext = createContext(null);
 
@@ -63,7 +63,7 @@ export function AdminProvider({ children }) {
       if (!target) {
         return;
       }
-      const status = target.status === "Активний" ? "Заблокований" : "Активний";
+      const status = target.status === USER_STATUS.active ? USER_STATUS.blocked : USER_STATUS.active;
       setUsers((current) => current.map((item) => (item.id === id ? { ...item, status } : item)));
       addLog(LOG_EVENTS.userStatusChanged, `${target.email}: ${status}`);
     },

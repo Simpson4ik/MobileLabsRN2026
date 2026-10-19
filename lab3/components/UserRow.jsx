@@ -3,6 +3,7 @@ import { memo } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { colors, radius, spacing } from "@/constants/theme";
+import { USER_STATUS } from "@/data/admin";
 
 export const USER_ROW_HEIGHT = 88;
 
@@ -14,7 +15,7 @@ const initials = (name) =>
     .slice(0, 2);
 
 function UserRowComponent({ item, onToggleStatus }) {
-  const isActive = item.status === "Активний";
+  const isActive = item.status === USER_STATUS.active;
   const statusColor = isActive ? colors.success : colors.danger;
 
   return (
