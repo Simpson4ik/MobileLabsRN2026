@@ -130,3 +130,42 @@ export async function createTextFile(root, path, name, content) {
   await file.write(content);
   return joinPath(path, fileName);
 }
+
+export async function readTextFile(root, path) {
+  return getFile(root, path).text();
+}
+
+export async function writeTextFile(root, path, content) {
+  await getFile(root, path).write(content);
+}
+
+export function deleteEntry(root, path, isDirectory) {
+  const entry = isDirectory ? getDirectory(root, path) : getFile(root, path);
+  if (!entry.exists) throw new Error("Об'єкт уже не існує");
+  entry.delete();
+}
+
+export function getEntryInfo(root, path, isDirectory) {
+  if (isDirectory) {
+    const directory = getDirectory(root, path);
+    const info = directory.info();
+    return {
+      exists: info.exists,
+      name: directory.name,
+      uri: directory.uri,
+      size: info.size ?? null,
+      modificationTime: info.modificationTime ?? null,
+      itemsCount: info.exists ? directory.list().length : 0,
+    };
+  }
+  const file = getFile(root, path);
+  const info = file.info();
+  return {
+    exists: info.exists,
+    name: file.name,
+    uri: file.uri,
+    extension: getExtension(file.name),
+    size: info.size ?? null,
+    modificationTime: info.modificationTime ?? null,
+  };
+}

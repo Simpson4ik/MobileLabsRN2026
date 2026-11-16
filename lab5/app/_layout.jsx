@@ -20,6 +20,8 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="browser" options={{ title: "Файли" }} />
         <Stack.Screen name="create" options={{ presentation: "modal", title: "Створення" }} />
+        <Stack.Screen name="file" options={{ title: "Файл" }} />
+        <Stack.Screen name="info" options={{ presentation: "modal", title: "Інформація" }} />
       </Stack>
     </SafeAreaProvider>
   );

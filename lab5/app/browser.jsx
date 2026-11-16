@@ -8,6 +8,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { EntryRow } from "@/components/EntryRow";
 import { colors, radius, spacing } from "@/constants/theme";
 import { getRoot, joinPath, listEntries, parentPath, splitPath } from "@/utils/fileSystem";
+import { confirmDelete } from "@/utils/actions";
 import { pluralize } from "@/utils/format";
 
 export default function BrowserScreen() {
@@ -37,9 +38,26 @@ export default function BrowserScreen() {
   };
 
   const openEntry = (entry) => {
+    const entryPath = joinPath(path, entry.name);
     if (entry.isDirectory) {
-      router.push({ pathname: "/browser", params: { root, path: joinPath(path, entry.name) } });
+      router.push({ pathname: "/browser", params: { root, path: entryPath } });
+    } else if (entry.extension === "txt") {
+      router.push({ pathname: "/file", params: { root, path: entryPath } });
+    } else {
+      // Відкривати для перегляду можна лише .txt, для інших файлів показуємо атрибути.
+      openInfo(entry);
     }
+  };
+
+  const openInfo = (entry) => {
+    router.push({
+      pathname: "/info",
+      params: { root, path: joinPath(path, entry.name), kind: entry.isDirectory ? "directory" : "file" },
+    });
+  };
+
+  const removeEntry = (entry) => {
+    confirmDelete({ root, path: joinPath(path, entry.name), ...entry }, load);
   };
 
   const openCreate = (type) => {
@@ -73,7 +91,14 @@ export default function BrowserScreen() {
       <FlatList
         data={entries}
         keyExtractor={(item) => (item.isDirectory ? "d:" : "f:") + item.name}
-        renderItem={({ item }) => <EntryRow entry={item} onPress={() => openEntry(item)} />}
+        renderItem={({ item }) => (
+          <EntryRow
+            entry={item}
+            onPress={() => openEntry(item)}
+            onInfo={() => openInfo(item)}
+            onDelete={() => removeEntry(item)}
+          />
+        )}
         contentContainerStyle={styles.list}
         ListEmptyComponent={
           <View style={styles.empty}>

@@ -10,7 +10,7 @@ function fileIcon(extension) {
   return "document";
 }
 
-export function EntryRow({ entry, onPress }) {
+export function EntryRow({ entry, onPress, onInfo, onDelete }) {
   const { name, isDirectory, size, modificationTime, itemsCount, extension } = entry;
   const meta = isDirectory
     ? `${pluralize(itemsCount, "об'єкт", "об'єкти", "об'єктів")} · ${formatDate(modificationTime)}`
@@ -36,6 +36,12 @@ export function EntryRow({ entry, onPress }) {
           {meta}
         </Text>
       </View>
+      <Pressable onPress={onInfo} hitSlop={6} style={({ pressed }) => [styles.action, pressed && styles.actionPressed]}>
+        <Ionicons name="information-circle-outline" size={22} color={colors.primary} />
+      </Pressable>
+      <Pressable onPress={onDelete} hitSlop={6} style={({ pressed }) => [styles.action, pressed && styles.actionPressed]}>
+        <Ionicons name="trash-outline" size={20} color={colors.danger} />
+      </Pressable>
       {isDirectory ? <Ionicons name="chevron-forward" size={20} color={colors.textMuted} /> : null}
     </Pressable>
   );
@@ -83,6 +89,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "600",
     color: colors.text,
+  },
+  action: {
+    padding: 6,
+    borderRadius: radius.sm,
+  },
+  actionPressed: {
+    backgroundColor: colors.background,
   },
   meta: {
     marginTop: 2,
